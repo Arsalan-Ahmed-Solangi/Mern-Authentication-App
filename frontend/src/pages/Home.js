@@ -4,7 +4,14 @@ import { useNavigate } from 'react-router-dom';
 const BASE_URL = 'http://localhost:5000/api';
 function Home() {
     const navigate = useNavigate();
-    const [quote,setQuote] = useState("");
+    const logout = () => {
+
+        localStorage.removeItem('token');
+
+        navigate('/login', { replace: true });
+    };
+
+    const [quote, setQuote] = useState("");
     const generateQuote = async () => {
         try {
             const token = localStorage.getItem('token');
@@ -43,7 +50,7 @@ function Home() {
                 <div className='card-body'>
                     <h4>Welcome Dashboard</h4>
                     <h6>Arsalan Ahmed</h6>
-                    <button className='btn btn-danger'>Logout</button>
+                    <button className='btn btn-danger' onClick={logout}>Logout</button>
                 </div>
             </div>
         </div>
